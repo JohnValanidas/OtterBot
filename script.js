@@ -1,20 +1,19 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-// SECRET TOKEN FOR BOT API
+let secretToken = "";
+// The secret token sould be posted into the .key in Otter bot's main folder.
+
 
 fs.readFile(".key", "utf8", function(error, data) {
-  const secretToken = data;
+  client.login(data);
 });
 
 
 
-const secretToken = "MzkyNzk4MDcwODg4MzMzMzIz.DRsiDQ.xWl5SPUHAurUnJNHkBH4QpKv3RU";
-
-client.login(secretToken);
-
-
 class Command {
+  // TODO: Paramatize input
+  // Validate whole word instead of noting what it "starts" with
   constructor (id, description) {
     this.id = id;
     this.description = description;
@@ -30,30 +29,66 @@ class Command {
   isValid(input) {
      if (input.content.startsWith(this.id)) {
        this.run(input);
-       this.log(input.author.username);
+       this.logCommand(input.author.username);
      }
   }
 
-  log(user) {
+  logCommand(user) {
     console.log(user + " used the " + this.id + " command");
+  }
+
+  getParamaters(input) {
+    let words = input.content.split(" ");
+    return words.slice(1, words.length);
   }
 }
 
 class Roll extends Command {
-  run(input) {
-    input.channel.send(Math.floor(Math.random()*6) + 1);
+  constructor(id, description, defaultNum=6) {
+    super(id, description);
+    this.defaultNum = defaultNum;
   }
+
+  run(input) {
+    if(parseInt(this.getParamaters(input)[0], 10)) {
+       input.channel.send(Math.floor(Math.random()*parseInt(this.getParamaters(input)[0], 10)) + 1);
+    }
+    else {
+      input.channel.send(Math.floor(Math.random()*this.defaultNum) + 1);
+    }
+  }   
 }
 
-class Ping extends Command {
+
+class Ping extends Command {  
   run(input) {
     input.channel.send("Pong");
   }
 }
+
+class ClearChannel extends Command {
+  run(input) {
+    //TODO
+  }
+}
+
+class OtterFacts extends Command {
+  run(input) {
+
+  }
+}
+
+class Test extends Command {
+  run(input) {
+    input.channel.send(this.getParamaters(input));
+  }
+}
 let test1 = new Ping("ping", "");
 let test2 = new Roll("roll", "");
+let test3 = new ClearChannel("ClearChannel", "");
+let test4 = new Test("tester", "");
 
-let commands = [test1,test2];
+let commands = [test1,test2,test3,test4];
 
 
 client.on("ready", () => {
@@ -73,17 +108,3 @@ function callCommands(message) {
     commands[index].isValid(message);
     }
 }
-
-
-// client.on("message", (message) => {
-//   if (message.content.startsWith("ping")) {
-//     console.log(message.author.username + " used the Ping command");
-//     message.channel.send("pong!");
-//   }
-// });
-
-// client.on("message", (message) => {
-//     if (message.content.startsWith("roll")) {
-//       message.channel.send(Math.floor(Math.random()*6) + 1);
-//     }
-// });
