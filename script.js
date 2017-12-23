@@ -2,9 +2,9 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
 let secretToken = "";
+
+
 // The secret token sould be posted into the .key in Otter bot's main folder.
-
-
 fs.readFile(".key", "utf8", function(error, data) {
   client.login(data);
 });
@@ -77,8 +77,26 @@ class ClearChannel extends Command {
 }
 
 class OtterFacts extends Command {
-  run(input) {
+  constructor(id, description) {
+    super(id, description);
+    this.factNum = 0;
+    var data = fs.readFileSync("Static/OtterFacts.json");
+    this.facts = JSON.parse(data);
+    console.log(this.facts);
+  }
 
+  // by default should return index of from factNum
+  getFact(index = this.factNum) {
+    return this.facts[index].fact;
+  }
+
+  getDescription(index = this.factNum) {
+    return this.facts[index].description;
+  }
+
+  run(input) {
+    input.channel.send(this.getFact());
+    this.factNum++;
   }
 }
 
@@ -91,12 +109,14 @@ let test1 = new Ping("ping", "");
 let test2 = new Roll("roll", "");
 let test3 = new ClearChannel("ClearChannel", "");
 let test4 = new Test("tester", "");
+let test5 = new OtterFacts("OtterFacts", "");
 
-let commands = [test1,test2,test3,test4];
+let commands = [test1,test2,test3,test4,test5];
 
 
 client.on("ready", () => {
-  console.log("I am ready!");
+  console.log("The Otters have synced up.");
+  console.log("They are ready for commands!");
 });
 
 client.on("message", function (message){
