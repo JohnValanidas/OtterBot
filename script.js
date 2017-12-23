@@ -49,12 +49,16 @@ class Roll extends Command {
     this.defaultNum = defaultNum;
   }
 
+  roll(sides=this.defaultNum) {
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
   run(input) {
     if(parseInt(this.getParamaters(input)[0], 10)) {
-       input.channel.send(Math.floor(Math.random()*parseInt(this.getParamaters(input)[0], 10)) + 1);
+       input.channel.send(this.roll(parseInt(this.getParamaters(input)[0], 10)));
     }
     else {
-      input.channel.send(Math.floor(Math.random()*this.defaultNum) + 1);
+      input.channel.send(this.roll());
     }
   }   
 }
