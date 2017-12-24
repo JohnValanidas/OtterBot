@@ -27,6 +27,8 @@ class Command {
   }
 
   isValid(input) {
+    this.channel = input.channel;
+    this.input = input;
      if (input.content.startsWith(this.id)) {
        this.run(input);
        this.logCommand(input.author.username);
@@ -40,6 +42,10 @@ class Command {
   getParamaters(input) {
     let words = input.content.split(" ");
     return words.slice(1, words.length);
+  }
+
+  sendQuote(text) {
+    this.channel.send('`'+text+'`');
   }
 }
 
@@ -55,10 +61,10 @@ class Roll extends Command {
 
   run(input) {
     if(parseInt(this.getParamaters(input)[0], 10)) {
-       input.channel.send(this.roll(parseInt(this.getParamaters(input)[0], 10)));
+      this.sendQuote(this.roll(parseInt(this.getParamaters(input)[0], 10)));
     }
     else {
-      input.channel.send(this.roll());
+      this.sendQuote(this.roll());
     }
   }   
 }
@@ -82,7 +88,6 @@ class OtterFacts extends Command {
     this.factNum = 0;
     var data = fs.readFileSync("Static/OtterFacts.json");
     this.facts = JSON.parse(data);
-    console.log(this.facts);
   }
 
   // by default should return index of from factNum
@@ -100,18 +105,17 @@ class OtterFacts extends Command {
   }
 }
 
-class Test extends Command {
-  run(input) {
-    input.channel.send(this.getParamaters(input));
-  }
+class TopReddit extends Command {
+  
 }
+
+
 let test1 = new Ping("ping", "");
 let test2 = new Roll("roll", "");
 let test3 = new ClearChannel("ClearChannel", "");
-let test4 = new Test("tester", "");
 let test5 = new OtterFacts("OtterFacts", "");
 
-let commands = [test1,test2,test3,test4,test5];
+let commands = [test1,test2,test3,test5];
 
 
 client.on("ready", () => {

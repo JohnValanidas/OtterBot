@@ -2,7 +2,7 @@
 
 ## Contents
 
-### Useage
+### Usage
 
 TODO: Explain Usage
 
@@ -10,6 +10,7 @@ TODO: Explain Usage
 
 ```Js
 class CommandName extends Command {
+
     run(input) {
         // Your code goes here....
     }
