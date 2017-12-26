@@ -17,15 +17,24 @@ client.on("ready", () => {
 });
 
 let Ping = require('./Commands/Ping.js');
-
+let OtterFacts = require('./Commands/OtterFacts.js');
+let TopReddit = require('./Commands/TopReddit.js');
+let Roll = require('./Commands/Roll.js');
 //let Ping = PingCommand.Ping
 // TODO: Make way of creating command objects and then add the objects to the array.
 let test = new Ping("Ping", "");
-let commands = [test];
+let test1 = new OtterFacts("OtterFacts", "");
+let test2 = new TopReddit("TopReddit", "");
+let test3 = new Roll("Roll", "");
+let commands = [test, test1, test2, test3];
+
+
+
+
 
 client.on("message", function (message){
     for(let index = 0; index < commands.length; index++) {
-      commands[index].isValid(message);
+      commands[index].call(message);
       }
 });
   

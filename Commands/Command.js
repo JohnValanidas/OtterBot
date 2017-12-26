@@ -13,32 +13,35 @@
     return this.id;
   }
 
-  isValid(input) {
-    this.channel = input.channel;
-    this.input = input;
-     if (input.content.startsWith(this.id)) {
-       this.run(input);
-       this.logCommand(input.author.username);
-     }
+  isValid() {
+     let message =  this.input.content.toLowerCase();
+     return message.startsWith(this.id.toLowerCase());
   }
 
   logCommand(user) {
     console.log(user + " used the " + this.id + " command");
   }
 
-  getParamaters(input) {
-    let words = input.content.split(" ");
+  getParamaters() {
+    let words = this.input.content.split(" ");
     return words.slice(1, words.length);
   }
 
   sendQuote(text) {
     this.channel.send('`'+text+'`');
   }
+  // Default run command 
   run(input) {
+    console.log("Warning - No run method has been defined in the " + this.id + " command.");
   }
 
   call(input) {
-    this.input = input
+    this.channel = input.channel;
+    this.input = input;
+    if (this.isValid()) {
+      this.run(this.input);
+      this.logCommand(this.input.author.username);
+    }
   }
 
 }

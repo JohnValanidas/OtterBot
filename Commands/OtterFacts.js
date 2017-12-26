@@ -1,15 +1,20 @@
 var Command = require ('./Command.js');
+var fs = require("fs");
+
 
 class OtterFacts extends Command {
   constructor(id, description) {
     super(id, description);
     this.factNum = 0;
-    var data = fs.readFileSync("../Static/OtterFacts.json");
+    var data = fs.readFileSync("./Static/OtterFacts.json");
     this.facts = JSON.parse(data);
   }
 
   // by default should return index of from factNum
   getFact(index = this.factNum) {
+    if(index == this.facts.length) {
+      index = 0;
+    }
     return this.facts[index].fact;
   }
 

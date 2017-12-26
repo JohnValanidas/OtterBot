@@ -1,8 +1,8 @@
 var Command = require ('./Command.js');
 
 class Ping extends Command {  
-    run(input) {
-      input.channel.send("Pong");
+    run() {
+      this.input.channel.send("Pong");
     }
 }
 
