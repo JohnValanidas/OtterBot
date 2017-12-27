@@ -1,10 +1,13 @@
   class Command {
   // TODO: Param atize input
   // Validate whole word instead of noting what it "starts" with
+  // TODO add optional names for commands and incorperate them into
+  //      the validation checks. Also place everything into a config file
+  
   constructor (id, description) {
     this.id = id;
     this.description = description;
-    this.setprfix();
+    this.setprefix();
   }
 
 
@@ -35,14 +38,14 @@
 
   // Default run command that is called to run when the command is used.
   // All of the command classes haeve to put there code here.
-  run(input) {
+  run() {
     // Default response that gets printed to console if a command has been created but a run command has not been added.
     console.log("Warning - No run method has been defined in the " + this.id + " command.");
   }
 
   //sets the prefix for  commands being used.
   //TODO: Create a json/config file for specification to include things like this
-  setprfix(prefix = "!") {
+  setprefix(prefix = "!") {
     this.prefix = prefix;
   }
 
@@ -53,7 +56,7 @@
       // Only want to create channel and input conditions once a valid message has been passed. 
       this.channel = input.channel;
       this.input = input;
-      this.run(this.input);
+      this.run();
       // logs command to the console -- will add message logging to files later ~ timestamps included
       this.logCommand(this.input.author.username);
     }

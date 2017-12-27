@@ -10,9 +10,9 @@ class Roll extends Command {
         return Math.floor(Math.random() * sides) + 1;
     }
 
-    run(input) {
-        if (parseInt(this.getParamaters(input)[0], 10)) {
-            this.sendQuote(this.roll(parseInt(this.getParamaters(input)[0], 10)));
+    run() {
+        if (parseInt(this.getParamaters()[0], 10)) {
+            this.sendQuote(this.roll(parseInt(this.getParamaters()[0], 10)));
         }
         else {
             this.sendQuote(this.roll());
