@@ -1,10 +1,14 @@
 # Otter Bot ~ An Auqatic pal for your discord server!
 
+Otter bot is a simple discorb bot side project.
+
 ## Contents
+
+(Usage)[#Usage]
 
 ### Usage
 
-TODO: Explain Usage
+Create a .key file inside of the main directory and place your discord bot's api key here. Main.js will pick up the key and log your bot into discord.
 
 ### Adding Commands
 
