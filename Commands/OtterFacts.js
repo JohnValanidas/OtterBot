@@ -25,13 +25,13 @@ class OtterFacts extends Command {
   // TODO: command parser so code can be DRY
   // TODO: Add method for lastfact and factnum++
   run() {
-    if ((this.getParamaters()[0] != null) && this.getParamaters()[0].toString().toLowerCase() === "description") {
+    if ((this.getParamaters()[1] != null) && this.getParamaters()[1].toString().toLowerCase() === "description") {
       // send fact + description in quote form
       this.sendQuote(this.getFact() + "\n\n" + this.getDescription());
       this.lastFact = this.factNum;
       this.factNum++;
     }
-    else if((this.getParamaters()[0] != null) && this.getParamaters()[0].toString().toLowerCase() === "last") {
+    else if((this.getParamaters()[1] != null) && this.getParamaters()[1].toString().toLowerCase() === "last") {
       this.sendQuote(this.getFact(this.lastFact) + "\n\n" + this.getDescription(this.lastFact));
     }
     // default command with no parameters is used.

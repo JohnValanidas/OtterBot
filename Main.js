@@ -24,6 +24,7 @@ let Information = require('./Commands/Information.js');
 //let Ping = PingCommand.Ping
 // TODO: Make way of creating command objects and then add the objects to the array.
 let test = new Ping("Ping", "");
+test.addAlias("p");
 let test1 = new OtterFacts("OtterFacts", "");
 let test2 = new TopReddit("TopReddit", "");
 let test3 = new Roll("Roll", "");
