@@ -21,22 +21,25 @@ let OtterFacts = require('./Commands/OtterFacts.js');
 let TopReddit = require('./Commands/TopReddit.js');
 let Roll = require('./Commands/Roll.js');
 let Information = require('./Commands/Information.js');
+let Help = require('./Commands/Help.js');
 //let Ping = PingCommand.Ping
 // TODO: Make way of creating command objects and then add the objects to the array.
 let test = new Ping("Ping", "");
+let commands = [];
 test.addAlias("p");
 let test1 = new OtterFacts("OtterFacts", "");
 let test2 = new TopReddit("TopReddit", "");
 let test3 = new Roll("Roll", "");
-let commands = [test, test1, test2, test3];
-
-
+let test5 = new Information("Information", "")
+commands = [test, test1, test2, test3, test5];
+let test4 = new Help("Help", "", commands);
+commands.push(test4);
 
 
 
 client.on("message", function (message){
     for(let index = 0; index < commands.length; index++) {
       commands[index].call(message);
-      }
+    }
 });
   
