@@ -1,13 +1,15 @@
   class Command {
-  // TODO: Param atize input
+  // TODO: Paramatize input
   // Validate whole word instead of noting what it "starts" with
   // TODO add optional names for commands and incorperate them into
   //      the validation checks. Also place everything into a config file
   
   constructor (id, description) {
     this.id = id;
+    this.aliases = [this.id];
     this.description = description;
     this.setprefix();
+    
   }
 
 
@@ -15,14 +17,36 @@
     return this.id;
   }
 
+  addAlias(name) {
+    this.aliases.push(name);
+  }
+
+  removeAlias(name) {
+    index = this.aliases.indexOf(name);
+    if(index != -1) {
+      this.aliases.splice(index, 1);
+    }
+    else {
+      // Should something happen?
+    }
+  }
+
   // checks if the message from chat is the command.
   isValid(message) {
      return message.startsWith(this.prefix + this.id.toLowerCase());
   }
 
-  // logs command from the user to the console.
+  // logs command from the user to the console and each commmand with a timestamp to the Logs/CommandLog.txt
+  // Log files are gitignored.
   logCommand(user) {
-    console.log(user + " used the " + this.id + " command");
+    let command = user + " used the " + this.id + " command";
+    console.log(command);
+    var d = new Date();
+    let fs = require('fs');
+    let logLine = d.toString() + ": " + command + " \n"
+    fs.appendFile('Logs/CommandLog.txt', logLine, function (err) {
+      if (err) throw err;
+    });
   }
 
   // Get paramaters after a command has been called and returns them.
