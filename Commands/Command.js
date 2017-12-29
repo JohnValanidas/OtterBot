@@ -1,9 +1,5 @@
   class Command {
   // TODO: Paramatize input
-  // Validate whole word instead of noting what it "starts" with
-  // TODO add optional names for commands and incorperate them into
-  //      the validation checks. Also place everything into a config file
-  
   constructor (id, description) {
     this.id = id;
     this.aliases = [this.id];
@@ -94,7 +90,9 @@
   help() {
     return "Help for " + this.id + " not yet implimented.";
   }
-  
+
+
+  // Auxilliary command to link the command array to each/specific commands
   linkCommands(commands) {
     this.commands = commands;
   }

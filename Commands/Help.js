@@ -1,14 +1,9 @@
 var Command = require('./Command.js');
 
 class Help extends Command {
-    // Help needs access to the commands array so it can iterate through it and call help on each command
-
-    // TODO: refactor help so it only works on single commands
-    // TODO: create commands to list commands and their descriptions
-
     constructor(id, description) {
         super(id, description);
-        this.index = -1;
+        this.index = -1; // hack to link index of the "found command"
     }
 
     run() {
@@ -27,12 +22,12 @@ class Help extends Command {
     }
 
     // check if the command is useable within the this.commands array
-    // checks against aliases as well
     commandExists(input) {
         let exists = false;
         for(let index = 0; index < this.commands.length; index++) {
            let command = this.commands[index];
-           // just adding the prefix here lets you use the build in command
+           // just adding the prefix here lets you use the built in command that also
+           // checks for alises
             if (command.isValid(this.prefix + input)) {
                 this.index = index;
                 return true;

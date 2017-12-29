@@ -1,6 +1,6 @@
 # Otter Bot ~ An Auqatic pal for your discord server!
 
-Otter bot is a simple discorb bot side project.
+Otter bot is a simple and cute discord bot.git st
 
 ## Contents
 
