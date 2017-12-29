@@ -16,24 +16,29 @@ client.on("ready", () => {
     console.log("They are ready for commands!");
 });
 
+
+// Importing commands
 let Ping = require('./Commands/Ping.js');
 let OtterFacts = require('./Commands/OtterFacts.js');
 let TopReddit = require('./Commands/TopReddit.js');
 let Roll = require('./Commands/Roll.js');
 let Information = require('./Commands/Information.js');
 let Help = require('./Commands/Help.js');
-//let Ping = PingCommand.Ping
-// TODO: Make way of creating command objects and then add the objects to the array.
-let test = new Ping("Ping", "");
+let Commands = require('./Commands/Commands.js');
+
+
 let commands = [];
-test.addAlias("p");
-let test1 = new OtterFacts("OtterFacts", "");
-let test2 = new TopReddit("TopReddit", "");
-let test3 = new Roll("Roll", "");
-let test5 = new Information("Information", "")
-commands = [test, test1, test2, test3, test5];
-let test4 = new Help("Help", "", commands);
-commands.push(test4);
+// TODO: Make way of creating command objects and then add the objects to the array.
+let test = new Ping("Ping", "Checks if the bot is working at all");
+let test1 = new OtterFacts("OtterFacts", "Gives a random otter fact with an optional description");
+let test2 = new TopReddit("TopReddit", "Returns the top posts from either the front page or a subreddit");
+let test3 = new Roll("Roll", "Rolls a die of a specified size");
+let test4 = new Help("Help", "Gives information on each command.");
+let test5 = new Information("Information", "Information about the bot")
+let test6 = new Commands("Commands", "Gives a list of commands");
+commands = [test, test1, test2, test3, test4, test5, test6];
+test4.linkCommands(commands);
+test6.linkCommands(commands);
 
 
 

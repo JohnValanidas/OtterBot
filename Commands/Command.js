@@ -94,6 +94,10 @@
   help() {
     return "Help for " + this.id + " not yet implimented.";
   }
+  
+  linkCommands(commands) {
+    this.commands = commands;
+  }
 }
 
 module.exports = Command;
