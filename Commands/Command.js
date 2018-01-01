@@ -30,7 +30,7 @@
     // Don't know to much about .this
     let prefix = this.prefix;
     return this.aliases.some(function(val){
-       return message === (prefix + val.toLowerCase());
+       return message.toLowerCase() === (prefix + val.toLowerCase());
     });
  }
 
@@ -39,9 +39,9 @@
   logCommand(user) {
     let command = user + " used the " + this.id + " command";
     console.log(command);
-    var d = new Date();
+    let date = new Date();
     let fs = require('fs');
-    let logLine = d.toString() + ": " + command + " \n"
+    let logLine = date.toString() + ": " + command + " \n"
     fs.appendFile('Logs/CommandLog.txt', logLine, function (err) {
       if (err) throw err;
     });
@@ -88,7 +88,7 @@
   // The help method itself will give an overview and will either list through the command list
   // or it will print the help of the command for more information.
   help() {
-    return "Help for " + this.id + " not yet implimented.";
+    return "Help for " + this.id + " not yet implemented.";
   }
 
 

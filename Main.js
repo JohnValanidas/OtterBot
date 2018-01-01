@@ -16,17 +16,20 @@ client.on("ready", () => {
     console.log("They are ready for commands!");
 });
 
-
+// CREATE A GOD DAMN CONFIG FILE FOR THIS
 // Importing commands
-let Ping = require('./Commands/Ping.js');
-let OtterFacts = require('./Commands/OtterFacts.js');
-let TopReddit = require('./Commands/TopReddit.js');
-let Roll = require('./Commands/Roll.js');
-let Information = require('./Commands/Information.js');
-let Help = require('./Commands/Help.js');
-let Commands = require('./Commands/Commands.js');
+let Ping          = require('./Commands/Ping.js');
+let OtterFacts    = require('./Commands/OtterFacts.js');
+let TopReddit     = require('./Commands/TopReddit.js');
+let Roll          = require('./Commands/Roll.js');
+let Information   = require('./Commands/Information.js');
+let Help          = require('./Commands/Help.js');
+let Commands      = require('./Commands/Commands.js');
 let SteamTogether = require('./Commands/SteamTogether.js');
-let ClearChannel = require('./Commands/ClearChannel.js');
+let ClearChannel  = require('./Commands/ClearChannel.js');
+
+//aux bot functions
+let ChatLogging   = require('./ChatLogging.js');
 
 
 let commands = [];
@@ -42,15 +45,20 @@ let test7 = new SteamTogether("SteamTogether","Checks and prints what games two 
 let test8 = new ClearChannel("ClearChannel","Give you control over the messages in any channel");
 commands = [test, test1, test2, test3, test4, test5, test6, test7, test8];
 
-
 test4.linkCommands(commands);
 test6.linkCommands(commands);
 
+//Auxillary bot functions
+let logger = new ChatLogging();
 
 
+// Interaction with messages from clint
 client.on("message", function (message){
-    for(let index = 0; index < commands.length; index++) {
-      commands[index].call(message);
-    }
+  // Command Loop
+  for(let index = 0; index < commands.length; index++) {
+    commands[index].call(message);
+  }
+  // Other message functions
+  logger.log(message);
 });
   
