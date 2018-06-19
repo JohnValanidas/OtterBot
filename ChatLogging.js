@@ -1,15 +1,55 @@
 class ChatLogging {
     constructor() {
+        this.fs = require('fs');
+    }
+   
+    // logs message to a file called called: channel_"channel name".txt in the Logs folder
+    // each line is "timespatmp : (channelname) author: content
+
+    /*
+    Make it so on start up the bot checks which channels it is in and makes corrisponding folders for each channel.
+    Make it only make folders on the fly if there is a private message from a user
+    This stackoverflow post for refrence
+    https://stackoverflow.com/questions/21194934/node-how-to-create-a-directory-if-doesnt-exist
+   
+    */
+
+    log(message) { 
+        let line = " ";
+        let date = new Date()
+        let channelName = message.channel.name
+        let guildName = message.guild.name
+        line += date.toString() + ": ("+ channelName + ") "+ message.author.username + ": " + message.content + '\n';
+
+        if (channelName) {
+            let dir = './Logs/Channels/' + message.channel.name +'/'
+            this.logTextChannel(channelName, line, dir)
+        }
+    }
+
+    logTextChannel(channelName, line, dir) {
+        if(!this.fs.existsSync(dir) ) {
+            this.fs.mkdirSync(dir);
+        }
+        this.logToDirectory(line, dir, 'chat log')
+    }
+
+    logPrivateMessage(line) {
+ 
+    }
+
+    logToFile(line, folder, filename) {
 
     }
 
-    log(message) {
-        let fs = require('fs');
-        let logLine = "";
-        let date = new Date();
-        let channelName = message.channel.name;
-        logLine += date.toString() + ": ("+ channelName + ") "+ message.author.username + ": " + message.content + '\n';
-        fs.appendFile('Logs/Channel_' + channelName + '.txt', logLine, function (err) {
+    logCommand(line, commandID) {
+        
+    }
+
+
+    // Always the command for a message to be logged to a directory
+    logToDirectory(line, dir, name = 'log') {
+        this.fs.appendFile(dir + name +'.txt', line, function (err) {
             if (err) throw err;
           });
     }

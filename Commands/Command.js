@@ -1,15 +1,20 @@
   class Command {
+
   // TODO: Paramatize input
   constructor (id, description) {
     this.id = id;
     this.aliases = [this.id];
     this.description = description;
+    // default settings for bot.
     this.setprefix();
+    this.setHelp("Help for " + this.id + " not yet implemented.");
   }
+
+
   toString() {
     return this.id;
   }
-
+  // alias names check
   addAlias(name) {
     this.aliases.push(name);
   }
@@ -36,6 +41,11 @@
 
   // logs command from the user to the console and each commmand with a timestamp to the Logs/CommandLog.txt
   // Log files are gitignored.
+
+
+  //TODO: Log each command to the channel logs folder as commandLog.txt
+  //      Check if folder exists - if doesn't create it
+  //      then log commands to the text file
   logCommand(user) {
     let command = user + " used the " + this.id + " command";
     console.log(command);
@@ -88,7 +98,12 @@
   // The help method itself will give an overview and will either list through the command list
   // or it will print the help of the command for more information.
   help() {
-    return "Help for " + this.id + " not yet implemented.";
+    return this.helpMsg;
+  }
+
+  // used by the config file to set up information from the settings.json
+  setHelp(msg) {
+    this.helpMsg = msg;
   }
 
 

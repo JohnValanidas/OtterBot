@@ -1,6 +1,6 @@
 # Otter Bot ~ An Auqatic pal for your discord server!
 
-Otter bot is a simple and cute discord bot.git st
+add some kind of iteligible description
 
 ## Contents
 
@@ -12,7 +12,11 @@ Create a .key file inside of the main directory and place your discord bot's api
 
 ### Adding Commands
 
+
 ```Js
+// command file is located inside the command folder.
+var Command = require('./Command.js');
+
 class CommandName extends Command {
 
     run(input) {

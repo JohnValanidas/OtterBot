@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-let secretToken = "";
 
 
 // The secret token sould be posted into the .key in Otter bot's main folder.
@@ -17,7 +16,7 @@ client.on("ready", () => {
 });
 
 // CREATE A GOD DAMN CONFIG FILE FOR THIS
-// Importing commands
+// bot commands
 let Ping          = require('./Commands/Ping.js');
 let OtterFacts    = require('./Commands/OtterFacts.js');
 let TopReddit     = require('./Commands/TopReddit.js');
@@ -43,10 +42,12 @@ let test5 = new Information("Information", "Information about the bot")
 let test6 = new Commands("Commands", "Gives a list of commands");
 let test7 = new SteamTogether("SteamTogether","Checks and prints what games two users have");
 let test8 = new ClearChannel("ClearChannel","Give you control over the messages in any channel");
-commands = [test, test1, test2, test3, test4, test5, test6, test7, test8];
+channelCommands = [test, test1, test2, test3, test4, test5, test6, test7, test8];
 
-test4.linkCommands(commands);
-test6.linkCommands(commands);
+// Help and Commands need to refrence to all of the commands so they can 
+// loop through them.
+test4.linkCommands(channelCommands);
+test6.linkCommands(channelCommands);
 
 //Auxillary bot functions
 let logger = new ChatLogging();
@@ -54,11 +55,20 @@ let logger = new ChatLogging();
 
 // Interaction with messages from clint
 client.on("message", function (message){
-  // Command Loop
-  for(let index = 0; index < commands.length; index++) {
-    commands[index].call(message);
-  }
-  // Other message functions
+  // Messages need to be logged first in order to check if a command crashes
+  // the bot
   logger.log(message);
+
+
+  // Command Loop
+  // Create ability for config to only do command loop on specified channels
+  // don't check in the commands, only call commands on working channels.
+  for(let index = 0; index < channelCommands.length; index++) {
+    channelCommands[index].call(message);
+  }
+
+  
+  // Other message functions
+
 });
   
