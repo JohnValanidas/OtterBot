@@ -5,6 +5,7 @@ class Commands extends Command {
     run(input) {
       this.sendQuote(this.buildCommandList());
     }
+    
     // Format commands so there is equal spacing after the command name. descriptions should all start on their own column.
     buildCommandList() {
         let list = "";

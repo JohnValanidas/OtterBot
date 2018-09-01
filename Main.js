@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fs = require("fs");
 
 
-// The secret token sould be posted into the .key in Otter bot's main folder.
+// The secret token sould be posted into the .key file in Otter bot's main folder.
 fs.readFile(".key", "utf8", function(error, data) {
   client.login(data);
 });
@@ -52,7 +52,7 @@ test6.linkCommands(channelCommands);
 //Auxillary bot functions
 let logger = new ChatLogging();
 
-
+// Main loop
 // Interaction with messages from clint
 client.on("message", function (message){
   // Messages need to be logged first in order to check if a command crashes

@@ -18,24 +18,32 @@ class ChatLogging {
         let line = " ";
         let date = new Date()
         let channelName = message.channel.name
-        let guildName = message.guild.name
-        line += date.toString() + ": ("+ channelName + ") "+ message.author.username + ": " + message.content + '\n';
+        //let guildName = message.guild.name
+        let author = message.author.username
+        line += date.toString() + ": "+ message.author.username + ": " + message.content + '\n';
 
         if (channelName) {
             let dir = './Logs/Channels/' + message.channel.name +'/'
-            this.logTextChannel(channelName, line, dir)
+            this.logTextChannel(line, dir)
+        }
+        else {
+            let dir = './Logs/Messages/'
+            this.logPrivateMessage(line, dir, author);
         }
     }
 
-    logTextChannel(channelName, line, dir) {
+    logTextChannel(line, dir) {
         if(!this.fs.existsSync(dir) ) {
             this.fs.mkdirSync(dir);
         }
-        this.logToDirectory(line, dir, 'chat log')
+        this.logToDirectory(line, dir, 'chatlog')
     }
 
-    logPrivateMessage(line) {
- 
+    logPrivateMessage(line, dir, author) {
+        if(!this.fs.existsSync(dir) ) {
+            this.fs.mkdirSync(dir);
+        }
+        this.logToDirectory(line, dir, author)
     }
 
     logToFile(line, folder, filename) {
