@@ -1,3 +1,6 @@
 .key
 Logs/*
 !Logs/Logs.md.gitkeep
+Static/sounds/*
+SoundBoardFiles.json
+node_modules/*

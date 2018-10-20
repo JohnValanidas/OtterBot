@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client  = new Discord.Client();
 const fs = require("fs");
 
 
@@ -26,6 +26,7 @@ let Help          = require('./Commands/Help.js');
 let Commands      = require('./Commands/Commands.js');
 let SteamTogether = require('./Commands/SteamTogether.js');
 let ClearChannel  = require('./Commands/ClearChannel.js');
+let SoundBoard    = require('./Commands/Soundboard.js');
 
 //aux bot functions
 let ChatLogging   = require('./ChatLogging.js');
@@ -42,7 +43,8 @@ let test5 = new Information("Information", "Information about the bot")
 let test6 = new Commands("Commands", "Gives a list of commands");
 let test7 = new SteamTogether("SteamTogether","Checks and prints what games two users have");
 let test8 = new ClearChannel("ClearChannel","Give you control over the messages in any channel");
-channelCommands = [test, test1, test2, test3, test4, test5, test6, test7, test8];
+let test9 = new SoundBoard("SoundBoard", "TODO: add soundboard desc");
+channelCommands = [test, test1, test2, test3, test4, test5, test6, test7, test8, test9];
 
 // Help and Commands need to refrence to all of the commands so they can 
 // loop through them.

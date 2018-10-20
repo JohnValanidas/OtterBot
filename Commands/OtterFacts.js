@@ -23,6 +23,7 @@ class OtterFacts extends Command {
     return this.facts[index].description;
   }
   // TODO: command parser so code can be DRY
+  // This is really bad code. Not a joke
   // TODO: Add method for [lastfact and factnum++]
   run() {
     if ((this.getParamaters()[1] != null) && this.getParamaters()[1].toString().toLowerCase() === "description") {
