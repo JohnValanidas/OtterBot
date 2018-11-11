@@ -34,7 +34,6 @@ class OtterBot {
   constructor() {
 
   }
-
   
 }
 

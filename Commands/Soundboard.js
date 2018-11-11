@@ -17,8 +17,8 @@ class Soundboard extends Command {
 
     parseCommand() {
         let args = this.getParamaters();
-        if (args.length == 1){
-            this.sendQuote("Please specify a command!\n"+this.help())
+        if (args.length == 1) {
+            this.sendQuote("Please specify a command!\n" + this.help())
             return;
         }
         let voiceChannel = this.input.member.voiceChannel;
@@ -46,24 +46,25 @@ class Soundboard extends Command {
         if (voiceChannel && songLocation) {
             voiceChannel.join().then(connection => {
                 const dispatcher = connection.playFile(songLocation);
-                dispatcher.on("end", end => {voiceChannel.leave()})
+                dispatcher.on("end", end => {
+                    voiceChannel.leave();
+                })
             }).catch(console.error)
             this.sendQuote("FOUND");
         }
-        if (songLocation === undefined)  {
+        if (songLocation === undefined) {
             this.sendQuote(song + " was not found");
         }
     }
 
     findSong(song) {
-        let found = undefined
-        for (let index = 0; index < this.soundFiles.length; index++ ) {
+        let found;
+        for (let index = 0; index < this.soundFiles.length; index++) {
             if (this.soundFiles[index].name === song) {
                 found = this.soundFiles[index].fileLocation;
                 break;
             }
         }
-    
         return found;
     }
 }
