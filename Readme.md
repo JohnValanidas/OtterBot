@@ -1,4 +1,4 @@
-# Otter Bot ~ An Auqatic pal for your discord server!
+# Otter Bot ~ An Aquatic pal for your discord server!
 
 add some kind of iteligible description
 
