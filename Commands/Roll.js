@@ -11,8 +11,8 @@ class Roll extends Command {
     }
 
     run() {
-        if (parseInt(this.getParamaters()[1], 10)) {
-            this.sendQuote(this.roll(parseInt(this.getParamaters()[1], 10)));
+        if (parseInt(this.getArguments()[1], 10)) {
+            this.sendQuote(this.roll(parseInt(this.getArguments()[1], 10)));
         }
         else {
             this.sendQuote(this.roll());

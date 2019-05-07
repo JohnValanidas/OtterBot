@@ -1,12 +1,12 @@
   class Command {
 
-  // TODO: Paramatize input
+  // TODO: Parametrize input
   constructor (id, description) {
     this.id = id;
     this.aliases = [this.id];
     this.description = description;
     // default settings for bot.
-    this.setprefix();
+    this.setPrefix();
     this.setHelp("Help for " + this.id + " not yet implemented.");
   }
 
@@ -20,7 +20,7 @@
   }
 
   removeAlias(name) {
-    index = this.aliases.indexOf(name);
+    let index = this.aliases.indexOf(name);
     if(index != -1) {
       this.aliases.splice(index, 1);
     }
@@ -51,16 +51,15 @@
     console.log(command);
     let date = new Date();
     let fs = require('fs');
-    let logLine = date.toString() + ": " + command + " \n"
+    let logLine = date.toString() + ": " + command + " \n";
     fs.appendFile('Logs/CommandLog.txt', logLine, function (err) {
       if (err) throw err;
     });
   }
 
-  // Get paramaters after a command has been called and returns them.
-  getParamaters() {
-    let words = this.input.content.split(" ");
-    return words
+  // Get parameters after a command has been called and returns them.
+  getArguments() {
+      return this.input.content.split(" ");
   }
 
   // sends a message to the text channel in a code block to represent a quote
@@ -69,16 +68,16 @@
   }
 
   // Default run command that is called to run when the command is used.
-  // All of the command classes haeve to put there code here.
+  // All of the command classes have to put there code here.
   run() {
     // Default response that gets printed to console if a command has been created but a run command has not been added.
     console.log("Warning - No run method has been defined in the " + this.id + " command.");
-    this.sendQuote(this.id + " has not yet been implimented");
+    this.sendQuote(this.id + " has not yet been implemented");
   }
 
   //sets the prefix for  commands being used.
   //TODO: Create a json/config file for specification to include things like this
-  setprefix(prefix = "!") {
+  setPrefix(prefix = "!") {
     this.prefix = prefix;
   }
 
@@ -86,7 +85,7 @@
 
   call(input) {
     this.input = input;
-    if (this.isValid(this.getParamaters()[0])) {
+    if (this.isValid(this.getArguments()[0])) {
       // Only want to create channel and input conditions once a valid message has been passed. 
       this.channel = input.channel;
       this.run();
@@ -94,7 +93,7 @@
       this.logCommand(this.input.author.username);
     }
   }
-  // Each method should impliment a help method and return relevent information for command
+  // Each method should implement a help method and return relevant information for command
   // The help method itself will give an overview and will either list through the command list
   // or it will print the help of the command for more information.
   help() {
@@ -107,7 +106,7 @@
   }
 
 
-  // Auxilliary command to link the command array to each/specific commands
+  // Auxiliary command to link the command array to each/specific commands
   linkCommands(commands) {
     this.commands = commands;
   }

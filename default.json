@@ -1,0 +1,12 @@
+{
+  "Ping":
+  {
+    "name": "Ping",
+    "Description":"Description"
+  },
+  "Roll":
+  {
+    "name": "Roll",
+    "Description":"Rolls a die"
+  }
+}
