@@ -2,11 +2,23 @@
   "Ping":
   {
     "name": "Ping",
-    "Description":"Description"
+    "description":"Description"
   },
   "Roll":
   {
     "name": "Roll",
-    "Description":"Rolls a die"
+    "description":"Rolls a die"
+  },
+  "Help":
+  {
+    "name": "Help",
+    "description": "Returns a help information on that command",
+    "link": true
+  },
+  "Commands":
+  {
+    "name": "Commands",
+    "description": "Returns a help information on that command",
+    "link": true
   }
 }
