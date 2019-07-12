@@ -4,3 +4,4 @@ Logs/*
 Static/sounds/*
 SoundBoardFiles.json
 node_modules/*
+.idea/*

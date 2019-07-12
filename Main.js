@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const client  = new Discord.Client();
 
 // Aux Library for files
-const fs = require("fs");
+const fs = require('fs');
 
 
 // Bot object that will house commands
@@ -128,7 +128,7 @@ function updateGuildBot(guild) {
 
 /**
  * Returns a config if a guild has one. Otherwise it returns the default one.
- * Curently returns a default config for everything. In the future it will quary a database.
+ * Currently returns a default config for everything. In the future it will quarry a database.
  * @param guildID
  * @returns {*}
  */
